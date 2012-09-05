@@ -713,13 +713,13 @@ function CT_RaidTracker_Update()
         CT_RaidTrackerFrameSnapshotButton:Disable();
     end
 
-    if((GetNumRaidMembers() == 0) and (GetNumPartyMembers() == 0)) then
+    if(( IsInRaid() == false)) then
         CT_RaidTrackerFrameNewRaidButton:Disable();
     else
-        if((GetNumRaidMembers() > 0)) then
+        if((GetNumGroupMembers() > 0)) then
         CT_RaidTrackerFrameNewRaidButton:Enable();
       else
-            if((GetNumPartyMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1)) then
+            if((GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1)) then
             CT_RaidTrackerFrameNewRaidButton:Enable();
           else
             CT_RaidTrackerFrameNewRaidButton:Disable();
@@ -1750,7 +1750,7 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
             local author = arg2;
 
             -- am i in a raid?
-            if(GetNumRaidMembers() == 0)then
+            if(IsInRaid() == false)then
                 SendChatMessage( "I am not in a raid at this time.", "WHISPER", nil, author);
                 return;
             end
@@ -1990,7 +1990,7 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
         end
     end
     if ( event == "RAID_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD") then
-        if ( GetNumRaidMembers() == 0 and event == "RAID_ROSTER_UPDATE" and CT_RaidTracker_GetCurrentRaid) then
+        if ( GetNumGroupMembers() == 0 and event == "RAID_ROSTER_UPDATE" and CT_RaidTracker_GetCurrentRaid) then
             local raidendtime = CT_RaidTracker_Date();
             for k, v in pairs(CT_RaidTracker_Online) do
                 CT_RaidTracker_Debug("ADDING LEAVE", k, raidendtime);
@@ -2005,18 +2005,18 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
                 CT_RaidTracker_RaidLog[CT_RaidTracker_GetCurrentRaid]["End"] = raidendtime;
             end
             CT_RaidTracker_GetCurrentRaid = nil;
-            CT_RaidTracker_Debug("Left raid.","GetNumRaidMembers() == 0");
+            CT_RaidTracker_Debug("Left raid.","GetNumGroupMembers() == 0");
             CT_RaidTracker_Offline = { };
             CT_RaidTracker_UpdateView();
             CT_RaidTracker_Update();
-        elseif ( not CT_RaidTracker_GetCurrentRaid and GetNumRaidMembers() > 0 and event == "RAID_ROSTER_UPDATE" and CT_RaidTracker_Options["AutoRaidCreation"] == 1) then
+        elseif ( not CT_RaidTracker_GetCurrentRaid and GetNumGroupMembers() > 0 and event == "RAID_ROSTER_UPDATE" and CT_RaidTracker_Options["AutoRaidCreation"] == 1) then
             CT_RaidTrackerCreateNewRaid();
         end
         if ( not CT_RaidTracker_GetCurrentRaid ) then
             return;
         end
         local updated;
-        for i = 1, GetNumRaidMembers(), 1 do
+        for i = 1, GetNumGroupMembers(), 1 do
             local name, online = UnitName("raid" .. i), UnitIsConnected("raid" .. i);
             if ( name and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                 local _, race = UnitRace("raid" .. i);
@@ -2085,8 +2085,8 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
         end
 
     -- Party code added thx to Gof
-    elseif ( GetNumRaidMembers() == 0 and (event == "PARTY_MEMBERS_CHANGED" or event == "PLAYER_ENTERING_WORLD")) then
-        if ( GetNumPartyMembers() == 0 and event == "PARTY_MEMBERS_CHANGED" and CT_RaidTracker_GetCurrentRaid) then
+    elseif ( GetNumGroupMembers() == 0 and (event == "PARTY_MEMBERS_CHANGED" or event == "PLAYER_ENTERING_WORLD")) then
+        if ( GetNumGroupMembers() == 0 and event == "PARTY_MEMBERS_CHANGED" and CT_RaidTracker_GetCurrentRaid) then
             local raidendtime = CT_RaidTracker_Date();
             for k, v in pairs(CT_RaidTracker_Online) do
              CT_RaidTracker_Debug("ADDING LEAVE", k, raidendtime);
@@ -2101,18 +2101,18 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
                 CT_RaidTracker_RaidLog[CT_RaidTracker_GetCurrentRaid]["End"] = raidendtime;
             end
             CT_RaidTracker_GetCurrentRaid = nil;
-            CT_RaidTracker_Debug("Left raid.","GetNumPartyMembers() == 0");
+            CT_RaidTracker_Debug("Left raid.","GetNumGroupMembers() == 0");
             CT_RaidTracker_Offline = { };
             CT_RaidTracker_UpdateView();
             CT_RaidTracker_Update();
-        elseif ( not CT_RaidTracker_GetCurrentRaid and GetNumPartyMembers() > 0 and event == "PARTY_MEMBERS_CHANGED" and CT_RaidTracker_Options["AutoGroup"] == 1) then
+        elseif ( not CT_RaidTracker_GetCurrentRaid and GetNumGroupMembers() > 0 and event == "PARTY_MEMBERS_CHANGED" and CT_RaidTracker_Options["AutoGroup"] == 1) then
             CT_RaidTrackerCreateNewRaid();
         end
         if ( not CT_RaidTracker_GetCurrentRaid ) then
             return;
         end
         local updated;
-        for i = 1, GetNumPartyMembers(), 1 do
+        for i = 1, GetNumGroupMembers(), 1 do
             local name, online = UnitName("party" .. i), UnitIsConnected("party" .. i);
             if ( name and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                 local _, race = UnitRace("party" .. i);
@@ -2362,16 +2362,16 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
 
                         local tAttendees = { };
                         if(CT_RaidTracker_Options["LogAttendees"] == 2) then
-                            if( GetNumRaidMembers() > 0 ) then
-                                for i = 1, GetNumRaidMembers() do
+                            if((IsInRaid() == true) and (GetNumGroupMembers() > 0)) then
+                                for i = 1, GetNumGroupMembers() do
                                     local name, rank, subgroup, level, class, fileName, zone, online = GetRaidRosterInfo(i);
                                     local name = UnitName("raid" .. i);
                                     if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                                         tinsert(tAttendees, name);
                                     end
                                 end
-                            elseif( (GetNumPartyMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
-                                for i = 1, GetNumPartyMembers() do
+                            elseif( (GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
+                                for i = 1, GetNumGroupMembers() do
                                     local online = UnitIsConnected("party" .. i);
                                     local name = UnitName("party" .. i);
                                     if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
@@ -2587,8 +2587,8 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
                     local tAttendees = { };
                     local tAttendeesWaitlist = { };
                     if( (CT_RaidTracker_Options["LogAttendees"] == 1) or (CT_RaidTracker_Options["LogAttendees"] == 3)) then
-                        if( GetNumRaidMembers() > 0 ) then
-                            for i = 1, GetNumRaidMembers() do
+                        if( GetNumGroupMembers() > 0 ) then
+                            for i = 1, GetNumGroupMembers() do
                                 local name, rank, subgroup, level, class, fileName, zone, online = GetRaidRosterInfo(i);
                                 local name = UnitName("raid" .. i);
                                 if (name and name ~= UKNOWNBEING and name ~= UNKNOWN) then
@@ -2601,8 +2601,8 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
                                     end;
                                 end
                             end
-                        elseif( (GetNumPartyMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
-                            for i = 1, GetNumPartyMembers() do
+                        elseif( (GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
+                            for i = 1, GetNumGroupMembers() do
                                 local name = UnitName("party" .. i);
                                 if (name and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                                     tinsert(tAttendees, name);
@@ -2688,11 +2688,11 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
         local membercount = 0;
         local unitprefix = 0;
         local memberdead = 0;
-        if ( GetNumRaidMembers() > 0) then -- in raid and active
-            membercount = GetNumRaidMembers();
+        if ((IsInRaid() == true) and (GetNumGroupMembers() > 0)) then -- in raid and active
+            membercount = GetNumGroupMembers();
             unitprefix = "raid";
-        elseif ( GetNumPartyMembers() > 0) then -- in group and active
-            membercount = GetNumPartyMembers()+1;
+        elseif ( GetNumGroupMembers() > 0) then -- in group and active
+            membercount = GetNumGroupMembers()+1;
             unitprefix = "party";
             if (UnitIsDeadOrGhost("player")) then
                 memberdead = memberdead + 1;
@@ -2736,16 +2736,16 @@ function CT_RaidTracker_AddWipe()
 
     local tAttendees = { };
     if(CT_RaidTracker_Options["LogAttendees"] ~= 0) then
-        if( GetNumRaidMembers() > 0 ) then
-            for i = 1, GetNumRaidMembers() do
+        if((IsInRaid() == true) and (GetNumGroupMembers() > 0)) then
+            for i = 1, GetNumGroupMembers() do
                 local name, rank, subgroup, level, class, fileName, zone, online = GetRaidRosterInfo(i);
                 local name = UnitName("raid" .. i);
                 if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                     tinsert(tAttendees, name);
                 end
             end
-        elseif( (GetNumPartyMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
-            for i = 1, GetNumPartyMembers() do
+        elseif( (GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
+            for i = 1, GetNumGroupMembers() do
                 local online = UnitIsConnected("party" .. i);
                 local name = UnitName("party" .. i);
                 if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
@@ -2788,16 +2788,16 @@ function CT_RaidTracker_AddAttendance()
 
     local tAttendees = { };
     if(CT_RaidTracker_Options["LogAttendees"] ~= 0) then
-        if( GetNumRaidMembers() > 0 ) then
-            for i = 1, GetNumRaidMembers() do
+        if((IsInRaid() == true) and (GetNumGroupMembers() > 0)) then
+            for i = 1, GetNumGroupMembers() do
                 local name, rank, subgroup, level, class, fileName, zone, online = GetRaidRosterInfo(i);
                 local name = UnitName("raid" .. i);
                 if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                     tinsert(tAttendees, name);
                 end
             end
-        elseif( (GetNumPartyMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
-            for i = 1, GetNumPartyMembers() do
+        elseif( (GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
+            for i = 1, GetNumGroupMembers() do
                 local online = UnitIsConnected("party" .. i);
                 local name = UnitName("party" .. i);
                 if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
@@ -2955,16 +2955,16 @@ SlashCmdList["RAIDTRACKER"] = function(msg)
 
                     local tAttendees = { };
                     if(CT_RaidTracker_Options["LogAttendees"] == 2) then
-                        if( GetNumRaidMembers() > 0 ) then
-                            for i = 1, GetNumRaidMembers() do
+                        if((IsInRaid() == true) and (GetNumGroupMembers() > 0)) then
+                            for i = 1, GetNumGroupMembers() do
                                 local name, rank, subgroup, level, class, fileName, zone, online = GetRaidRosterInfo(i);
                                 local name = UnitName("raid" .. i);
                                 if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                                     tinsert(tAttendees, name);
                                 end
                             end
-                        elseif( (GetNumPartyMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
-                            for i = 1, GetNumPartyMembers() do
+                        elseif( (GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
+                            for i = 1, GetNumGroupMembers() do
                                 local online = UnitIsConnected("party" .. i);
                                 local name = UnitName("party" .. i);
                                 if (name and online and name ~= UKNOWNBEING and name ~= UNKNOWN) then
@@ -3410,8 +3410,8 @@ function CT_RaidTrackerCreateNewRaid()
     });
     CT_RaidTracker_SortRaidTable();
     CT_RaidTracker_GetCurrentRaid = 1;
-    if( GetNumRaidMembers() > 0 ) then
-        for i = 1, GetNumRaidMembers(), 1 do
+    if((IsInRaid() == true) and (GetNumGroupMembers() > 0)) then
+        for i = 1, GetNumGroupMembers(), 1 do
             local sPlayer = UnitName("raid" .. i);
             local _, race = UnitRace("raid" .. i);
             local sex = UnitSex("raid" .. i);
@@ -3445,8 +3445,8 @@ function CT_RaidTrackerCreateNewRaid()
                 CT_RaidTracker_Online[name] = online;
             end
         end
-    elseif( (GetNumPartyMembers()  > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
-        for i = 1, GetNumPartyMembers(), 1 do
+    elseif( (GetNumGroupMembers()  > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
+        for i = 1, GetNumGroupMembers(), 1 do
             local sPlayer = UnitName("party" .. i);
             local _, race = UnitRace("party" .. i);
             local sex = UnitSex("party" .. i);
@@ -5285,8 +5285,8 @@ function CT_RaidTracker_AddEventSaveEx(event_name, event_note, event_value, even
     local tAttendeesWaitlist = { };
     
     if( (CT_RaidTracker_Options["LogAttendees"] == 1) or (CT_RaidTracker_Options["LogAttendees"] == 3)) then
-        if( GetNumRaidMembers() > 0 ) then
-            for i = 1, GetNumRaidMembers() do
+        if((IsInRaid() == true) and (GetNumGroupMembers() > 0)) then
+            for i = 1, GetNumGroupMembers() do
                 local name, rank, subgroup, level, class, fileName, zone, online = GetRaidRosterInfo(i);
                 local name = UnitName("raid" .. i);
                 if (name and name ~= UKNOWNBEING and name ~= UNKNOWN) then
@@ -5299,8 +5299,8 @@ function CT_RaidTracker_AddEventSaveEx(event_name, event_note, event_value, even
                     end;
                 end
             end
-        elseif( (GetNumPartyMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
-            for i = 1, GetNumPartyMembers() do
+        elseif( (GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1) ) then
+            for i = 1, GetNumGroupMembers() do
                 local name = UnitName("party" .. i);
                 if (name and name ~= UKNOWNBEING and name ~= UNKNOWN) then
                     tinsert(tAttendees, name);

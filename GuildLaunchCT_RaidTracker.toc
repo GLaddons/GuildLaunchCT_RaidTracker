@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Title: GL CT_RaidTracker
 ## Version: v2.8.1
 ## X-Version: (Guild Launch) Modded by Eris & Guild Launch
