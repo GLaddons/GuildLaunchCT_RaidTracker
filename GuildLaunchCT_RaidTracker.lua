@@ -713,19 +713,15 @@ function CT_RaidTracker_Update()
         CT_RaidTrackerFrameSnapshotButton:Disable();
     end
 
-    if(( IsInRaid() == false)) then
-        CT_RaidTrackerFrameNewRaidButton:Disable();
+    if(IsInRaid() == true) then
+        CT_RaidTrackerFrameNewRaidButton:Enable();
     else
-        if((GetNumGroupMembers() > 0)) then
+      if((GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1)) then
         CT_RaidTrackerFrameNewRaidButton:Enable();
       else
-            if((GetNumGroupMembers() > 0) and (CT_RaidTracker_Options["LogGroup"] == 1)) then
-            CT_RaidTrackerFrameNewRaidButton:Enable();
-          else
-            CT_RaidTrackerFrameNewRaidButton:Disable();
-          end;
+        CT_RaidTrackerFrameNewRaidButton:Disable();
       end;
-    end
+    end;
 
     --[[
     if ( CT_RaidTrackerFrame.selected ) then
