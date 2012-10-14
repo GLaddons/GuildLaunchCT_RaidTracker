@@ -2518,6 +2518,7 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
             end
         end
     elseif ( event == "ZONE_CHANGED_NEW_AREA" ) then
+        CT_RaidTracker_Debug("Zone Changed", CT_RaidTracker_Options["AutoZone"]);
         if(CT_RaidTracker_Options["AutoZone"] == 1) then
             CT_RaidTracker_DoZoneCheck();
             CT_RaidTracker_DoRaidIdCheck();
@@ -2828,9 +2829,11 @@ function CT_RaidTackes_NextBoss(name)
 end;
 
 function CT_RaidTracker_DoZoneCheck()
+    CT_RaidTracker_Debug("New Zone Check",1);
     if(not CT_RaidTracker_GetCurrentRaid) then
         return;
     end
+    CT_RaidTracker_Debug("New Zone Check",2);
     local newzone = GetRealZoneText();
     CT_RaidTracker_Debug("Current Zone",newzone);
     local checkednewzone = "";
@@ -2841,6 +2844,7 @@ function CT_RaidTracker_DoZoneCheck()
             break;
         end
     end
+    CT_RaidTracker_Debug("New Zone Check",3);
     for k, v in pairs(CT_RaidTracker_CustomZoneTriggers) do
         if(newzone == k) then
             CT_RaidTracker_Debug("Zone is Custom Instance",v);
@@ -2853,6 +2857,7 @@ function CT_RaidTracker_DoZoneCheck()
           return false;
     end;
 
+    CT_RaidTracker_Debug("New Zone Check",4);
     if(not CT_RaidTracker_RaidLog[CT_RaidTracker_GetCurrentRaid]["zone"]) then
         CT_RaidTracker_Debug("Set new Zone",checkednewzone);
             CT_RaidTracker_RaidLog[CT_RaidTracker_GetCurrentRaid]["zone"] = checkednewzone;

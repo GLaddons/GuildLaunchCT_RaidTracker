@@ -5,6 +5,8 @@ CT_ITEMREG = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)%";
 CT_ITEMREG_MULTI = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)x(%d+)%";
 
 CT_RaidTracker_Zones = {
+	"Mogu'shan Vaults",
+	"---- WoTLK -----------------",
 	"Battle of Mount Hyjal",
 	"Baradin Hold",
 	"Blackwing Descent",
@@ -13,12 +15,20 @@ CT_RaidTracker_Zones = {
 	"Firelands",
 	"Dragon Soul",
 	"---- Test -----------------",
-    -- TEST
     "Ragefire Chasm",
     "The Stockade",
 };
 
 CT_RaidTracker_Bosses = {
+	["Mogu'shan Vaults"] = {
+		"The Stone Guard",
+		"Feng the Accursed",
+		"Gara'jal the Spiritbinder",
+		"The Spirit Kings",
+		"Elegon",
+		"Will of the Emperor",
+	},						
+    -- WOTLK
 	["Battle of Mount Hyjal"] = {
 		"",
 	},
@@ -66,10 +76,10 @@ CT_RaidTracker_Bosses = {
 	},						
     -- TEST
 	["Ragefire Chasm"] = {
-      		"Oggleflint",
-            "Taragaman the Hungerer",
-      		"Jergosh the Invoker",
-      		"Bazzalan",
+      		"Adarogg",
+            "Dark Shaman Koranthal",
+      		"Slagmaw",
+      		"Lava Guard Gordoth",
    	},
 	["The Stockade"] = {
       		"Bazil Thredd",
@@ -92,6 +102,8 @@ CT_RaidTracker_lang_ReceivesLoot4 = "You receive loot: "..CT_ITEMREG_MULTI..".";
 CT_RaidTracker_lang_ReceivesLootYou = "You";
 
 CT_RaidTracker_ZoneTriggers = {
+	["Mogu'shan Vaults"] = "Mogu'shan Vaults",
+	-- WOTLK
 	["Battle of Mount Hyjal"] = "Battle of Mount Hyjal",
 	["Baradin Hold"] = "Baradin Hold",
 	["Blackwing Descent"] = "Blackwing Descent",
@@ -105,6 +117,14 @@ CT_RaidTracker_ZoneTriggers = {
 };
 
 CT_RaidTracker_BossUnitTriggers = {
+	-- Mogushan
+	["The Stone Guard"] =	"The Stone Guard",
+	["Feng the Accursed"] = "Feng the Accursed",
+	["Gara'jal the Spiritbinder"] = "Gara'jal the Spiritbinder",
+	["The Spirit Kings"] = "The Spirit Kings",
+	["Elegon"] = "Elegon",
+	["Will of the Emperor"] = "Will of the Emperor",
+	-- Other
 	["Argaloth"] = "Argaloth",
 	["Occu’thar"] = "Occu’thar",
 	["Magmaw"] = "Magmaw",
@@ -140,10 +160,10 @@ CT_RaidTracker_BossUnitTriggers = {
 	["Deathwing"] = 				"Spine of Deathwing",
 	["Madness of Deathwing"] = 			"IGNORE",	
 	-- Ragefire Chasm
-    ["Oggleflint"] = "Oggleflint",
-    ["Taragaman the Hungerer"] = "Taragaman the Hungerer",
-    ["Jergosh the Invoker"] = "Jergosh the Invoker",
-    ["Bazzalan"] = "Bazzalan",
+    ["Adarogg"] = "Adarogg",
+    ["Dark Shaman Koranthal"] = "Dark Shaman Koranthal",
+    ["Slagmaw"] = "Slagmaw",
+    ["Lava Guard Gordoth"] = "Lava Guard Gordoth",
     -- The Stockade
     ["Bazil Thredd"] = "Bazil Thredd",
     ["Bruegal Ironknuckle"] = "Bruegal Ironknuckle",
