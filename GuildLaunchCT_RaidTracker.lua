@@ -1721,7 +1721,7 @@ function CT_RaidTracker_OnLoad(this)
     -- Register events
     this:RegisterEvent("CHAT_MSG_LOOT");
     this:RegisterEvent("CHAT_MSG_SYSTEM");
-    this:RegisterEvent("RAID_ROSTER_UPDATE");
+    this:RegisterEvent("GROUP_ROSTER_UPDATE");
     this:RegisterEvent("VARIABLES_LOADED");
     this:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
     this:RegisterEvent("ZONE_CHANGED_NEW_AREA");
@@ -1985,8 +1985,8 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
             end
         end
     end
-    if ( event == "RAID_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD") then
-        if ( GetNumGroupMembers() == 0 and event == "RAID_ROSTER_UPDATE" and CT_RaidTracker_GetCurrentRaid) then
+    if ( event == "GROUP_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD") then
+        if ( GetNumGroupMembers() == 0 and event == "GROUP_ROSTER_UPDATE" and CT_RaidTracker_GetCurrentRaid) then
             local raidendtime = CT_RaidTracker_Date();
             for k, v in pairs(CT_RaidTracker_Online) do
                 CT_RaidTracker_Debug("ADDING LEAVE", k, raidendtime);
@@ -2005,7 +2005,7 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
             CT_RaidTracker_Offline = { };
             CT_RaidTracker_UpdateView();
             CT_RaidTracker_Update();
-        elseif ( not CT_RaidTracker_GetCurrentRaid and GetNumGroupMembers() > 0 and event == "RAID_ROSTER_UPDATE" and CT_RaidTracker_Options["AutoRaidCreation"] == 1) then
+        elseif ( not CT_RaidTracker_GetCurrentRaid and GetNumGroupMembers() > 0 and IsInRaid() and event == "GROUP_ROSTER_UPDATE" and CT_RaidTracker_Options["AutoRaidCreation"] == 1) then
             CT_RaidTrackerCreateNewRaid();
         end
         if ( not CT_RaidTracker_GetCurrentRaid ) then
