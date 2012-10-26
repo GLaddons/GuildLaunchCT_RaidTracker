@@ -3,7 +3,7 @@
  xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 	<Script file="localization.lua"/>
 	<Script file="GuildLaunchCT_RaidTracker.lua"/>
-	<Script file="CT_GPTooltip.lua"/>
+	<Script file="CT_GPTooltip-1.2.lua"/>
     <!-- quest fonts changed - making our own -->
 	<Font name="GLRaidTracker_FontNormalYellow" inherits="GameFontNormal" virtual="true" >
 		<Color r="1.0" g="0.75" b="0"/>

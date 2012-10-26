@@ -5,6 +5,8 @@ GuildLaunchCT_RaidTracker.cannotDetachTooltip = true
 GuildLaunchCT_RaidTracker.cannotHideText = false
 CT_RaidTracker_Online = { };
 
+local GPLib = LibStub("LibGearPoints-1.2")
+
 CT_RaidTracker_Version = GetAddOnMetadata("GuildLaunchCT_RaidTracker", "Version");
 CT_RaidTracker_FuBarOptions = { };
 CT_RaidTracker_Events = { };
@@ -2439,7 +2441,7 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
 
                             if ( (itemoptions and itemoptions["askcosts"] and itemoptions["askcosts"] == 1) or ((CT_RaidTracker_Options["AskCost"] ~= 0 and CT_RaidTracker_RarityTable[sColor] >= CT_RaidTracker_Options["AskCost"]) and (not itemoptions or not itemoptions["askcosts"])) ) then -- code and idea from tlund
                                 if(CT_RaidTracker_Options["AutoSetEPGPCost"] == 1)then
-                                    sCosts = CT_EPGP_GetGPValue(sLink);
+                                    sCosts = GPLib:GPValue(sLink);
                                     CT_RaidTracker_Debug("itemitemid:", itemitemid, "cost:", scosts);
                                     CT_RaidTracker_EditCostsEx(CT_RaidTracker_GetCurrentRaid, 1, sCosts);
                                 else
@@ -3061,7 +3063,7 @@ SlashCmdList["RAIDTRACKER"] = function(msg)
         CT_RaidTracker_ItemOptions_ScrollBar_Update();
         CT_RaidTrackerItemOptionsFrame:Show();
     elseif(command == "gptest") then
-        CT_RaidTracker_Print(args.." is worth "..CT_EPGP_GetGPValue(args).." GP", 1, 1, 0);
+        CT_RaidTracker_Print(args.." is worth "..GPLib:GetValue(args).." GP", 1, 1, 0);
     elseif(command == "options") then
         CT_RaidTrackerOptionsFrame:Show();
     elseif(command == "o") then
