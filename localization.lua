@@ -118,12 +118,16 @@ CT_RaidTracker_ZoneTriggers = {
 
 CT_RaidTracker_BossUnitTriggers = {
 	-- Mogushan
-	["The Stone Guard"] =	"The Stone Guard",
-	["Feng the Accursed"] = "Feng the Accursed",
-	["Gara'jal the Spiritbinder"] = "Gara'jal the Spiritbinder",
-	["The Spirit Kings"] = "The Spirit Kings",
-	["Elegon"] = "Elegon",
-	["Will of the Emperor"] = "Will of the Emperor",
+	["The Stone Guard"] 			=	"The Stone Guard",
+	["Amethyst Guardian"] 			=	"The Stone Guard",
+	["Cobalt Guardian"] 			=	"IGNORE",
+	["Jade Guardian"] 				=	"IGNORE",
+	["Jasper Guardian"] 			=	"IGNORE",
+	["Feng the Accursed"] 			= "Feng the Accursed",
+	["Gara'jal the Spiritbinder"] 	= "Gara'jal the Spiritbinder",
+	["The Spirit Kings"] 			= "The Spirit Kings",
+	["Elegon"] 						= "Elegon",
+	["Will of the Emperor"] 		= "Will of the Emperor",
 	-- Other
 	["Argaloth"] = "Argaloth",
 	["Occu’thar"] = "Occu’thar",
