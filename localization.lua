@@ -6,6 +6,8 @@ CT_ITEMREG_MULTI = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)x(%d+)%";
 
 CT_RaidTracker_Zones = {
 	"Mogu'shan Vaults",
+	"Terrace of Endless Spring",
+	"Heart of Fear",
 	"---- WoTLK -----------------",
 	"Battle of Mount Hyjal",
 	"Baradin Hold",
@@ -27,6 +29,20 @@ CT_RaidTracker_Bosses = {
 		"The Spirit Kings",
 		"Elegon",
 		"Will of the Emperor",
+	},
+	["Terrace of Endless Spring"] = {
+		"Protectors of the Endless",
+		"Tsulong",
+		"Lei Shi",
+		"Sha of Fear",
+	},
+	["Heart of Fear"] = {
+		"Imperial Vizier Zor'lok",
+		"Blade Lord Ta'yak",
+		"Garalon",
+		"Wind Lord Mel'jarak",
+		"Amber-Shaper Un'sok",
+		"Grand Empress Shek'zeer",
 	},						
     -- WOTLK
 	["Battle of Mount Hyjal"] = {
@@ -103,6 +119,8 @@ CT_RaidTracker_lang_ReceivesLootYou = "You";
 
 CT_RaidTracker_ZoneTriggers = {
 	["Mogu'shan Vaults"] = "Mogu'shan Vaults",
+	["Terrace of Endless Spring"] = "Terrace of Endless Spring",
+	["Heart of Fear"] = "Heart of Fear",
 	-- WOTLK
 	["Battle of Mount Hyjal"] = "Battle of Mount Hyjal",
 	["Baradin Hold"] = "Baradin Hold",
@@ -123,11 +141,23 @@ CT_RaidTracker_BossUnitTriggers = {
 	["Cobalt Guardian"] 			=	"IGNORE",
 	["Jade Guardian"] 				=	"IGNORE",
 	["Jasper Guardian"] 			=	"IGNORE",
-	["Feng the Accursed"] 			= "Feng the Accursed",
-	["Gara'jal the Spiritbinder"] 	= "Gara'jal the Spiritbinder",
-	["The Spirit Kings"] 			= "The Spirit Kings",
-	["Elegon"] 						= "Elegon",
-	["Will of the Emperor"] 		= "Will of the Emperor",
+	["Feng the Accursed"] 			= 	"Feng the Accursed",
+	["Gara'jal the Spiritbinder"] 	= 	"Gara'jal the Spiritbinder",
+	["The Spirit Kings"] 			= 	"The Spirit Kings",
+	["Elegon"] 						= 	"Elegon",
+	["Will of the Emperor"] 		= 	"Will of the Emperor",
+	-- Endless
+	["Protector Kaolan"] 			= 	"Protectors of the Endless",
+	["Tsulong"] 					= 	"Tsulong",
+	["Lei Shi"] 					= 	"Lei Shi",
+	["Cheng Kang"] 					= 	"Sha of Fear",
+	-- HoF
+	["Imperial Vizier Zor'lok"] 	= 	"Imperial Vizier Zor'lok",
+	["Blade Lord Ta'yak"] 			= 	"Blade Lord Ta'yak",
+	["Garalon"] 					= 	"Garalon",
+	["Wind Lord Mel'jarak"] 		= 	"Wind Lord Mel'jarak",
+	["Amber-Shaper Un'sok"] 		= 	"Amber-Shaper Un'sok",
+	["Grand Empress Shek'zeer"] 	= 	"Grand Empress Shek'zeer",
 	-- Other
 	["Argaloth"] = "Argaloth",
 	["Occu’thar"] = "Occu’thar",
@@ -195,6 +225,19 @@ CT_RaidTracker_lang_BossKills_NewRagnaros_BossName = "Ragnaros";
 
 CT_RaidTracker_lang_BossKills_DeathwingFinal_Yell = "It is time. I will expend everything to bind every thread here, now, around the Dragon Soul. What comes to pass will NEVER be undone.";
 CT_RaidTracker_lang_BossKills_DeathwingFinal_BossName = "Madness of Deathwing";
+
+
+CT_RaidTracker_lang_BossKills_WillOfTheEmperor_Yell = "I fear that our war against our ancient enemies is still far from over.";
+CT_RaidTracker_lang_BossKills_WillOfTheEmperor_BossName = "Will of the Emperor";
+
+CT_RaidTracker_lang_BossKills_SpiritKings_Yell = "A secret passage has opened beneath the platform, this way!";
+CT_RaidTracker_lang_BossKills_SpiritKings_BossName = "The Spirit Kings";
+
+CT_RaidTracker_lang_BossKills_LeiShi_Yell = "I... ah... oh! Did I...? Was I...? It was... so... cloudy.";
+CT_RaidTracker_lang_BossKills_LeiShi_BossName = "Lei Shi";
+
+CT_RaidTracker_lang_BossKills_Tsulong_Yell = "I thank you, strangers. I have been freed.";
+CT_RaidTracker_lang_BossKills_Tsulong_BossName = "Tsulong";
 
 -- Translations
 

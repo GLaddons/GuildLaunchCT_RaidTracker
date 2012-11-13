@@ -1821,11 +1821,26 @@ function CT_RaidTracker_OnEvent(this, event, arg1, arg2, arg3, arg4, arg5, arg6,
             event = "COMBAT_LOG_EVENT_UNFILTERED";
             arg2 = "UNIT_DIED";
             arg9 = CT_RaidTracker_lang_BossKills_DeathwingFinal_BossName;                
-        --elseif(arg1 == CT_RaidTracker_lang_BossKills_ValionaTheralion_Yell) then
-        --    CT_RaidTracker_Debug("Valiona and Theralion have Been Defeated");
-        --    event = "COMBAT_LOG_EVENT_UNFILTERED";
-        --    arg2="UNIT_DIED";
-        --    arg7 =CT_RaidTracker_lang_BossKills_ValionaTheralion_BossName;                                
+        elseif(arg1 == CT_RaidTracker_lang_BossKills_WillOfTheEmperor_Yell) then
+            CT_RaidTracker_Debug("New Will of Emperor Defeated");
+            event = "COMBAT_LOG_EVENT_UNFILTERED";
+            arg2 = "UNIT_DIED";
+            arg9 = CT_RaidTracker_lang_BossKills_WillOfTheEmperor_BossName; 
+        elseif(arg1 == CT_RaidTracker_lang_BossKills_SpiritKings_Yell) then
+            CT_RaidTracker_Debug("New Spirit Kings Defeated");
+            event = "COMBAT_LOG_EVENT_UNFILTERED";
+            arg2 = "UNIT_DIED";
+            arg9 = CT_RaidTracker_lang_BossKills_SpiritKings_BossName;
+        elseif(arg1 == CT_RaidTracker_lang_BossKills_LeiShi_Yell) then
+            CT_RaidTracker_Debug("New Lei Shi Defeated");
+            event = "COMBAT_LOG_EVENT_UNFILTERED";
+            arg2 = "UNIT_DIED";
+            arg9 = CT_RaidTracker_lang_BossKills_LeiShi_BossName;                                                       
+        elseif(arg1 == CT_RaidTracker_lang_BossKills_Tsulong_Yell) then
+            CT_RaidTracker_Debug("New Tsulong Defeated");
+            event = "COMBAT_LOG_EVENT_UNFILTERED";
+            arg2 = "UNIT_DIED";
+            arg9 = CT_RaidTracker_lang_BossKills_Tsulong_BossName;             
         end
         --[[
         -- yell sample
