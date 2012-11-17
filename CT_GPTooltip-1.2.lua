@@ -7,8 +7,6 @@ local MINOR_VERSION = 10200
 local lib, oldMinor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then return end
 
-local Debug = LibStub("LibDebug-1.0")
-
 -- This is the high price equipslot multiplier.
 local EQUIPSLOT_MULTIPLIER_1 = {
   INVTYPE_HEAD = 1,
@@ -341,12 +339,10 @@ local recent_items_map = {}
 local function UpdateRecentLoot(itemLink)
   if recent_items_map[itemLink] then return end
 
-  -- Debug("Adding %s to recent items", itemLink)
   table.insert(recent_items_queue, 1, itemLink)
   recent_items_map[itemLink] = true
   if #recent_items_queue > 15 then
     local itemLink = table.remove(recent_items_queue)
-    -- Debug("Removing %s from recent items", itemLink)
     recent_items_map[itemLink] = nil
   end
 end

@@ -1,6 +1,6 @@
 ## Interface: 50001
 ## Title: GL CT_RaidTracker
-## Version: v2.9.7
+## Version: v2.9.8
 ## X-Version: (Guild Launch) Modded by Eris & Guild Launch
 ## Notes: Counts raid loot and attendence, modified for GuildLaunch.com
 ## X-GLExportVersion: GL-1.0
