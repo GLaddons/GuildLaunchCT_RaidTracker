@@ -5,6 +5,7 @@ CT_ITEMREG = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)%";
 CT_ITEMREG_MULTI = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)x(%d+)%";
 
 CT_RaidTracker_Zones = {
+	"Throne of Thunder",
 	"Mogu'shan Vaults",
 	"Terrace of Endless Spring",
 	"Heart of Fear",
