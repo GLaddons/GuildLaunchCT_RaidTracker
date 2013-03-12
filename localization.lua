@@ -5,6 +5,7 @@ CT_ITEMREG = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)%";
 CT_ITEMREG_MULTI = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)x(%d+)%";
 
 CT_RaidTracker_Zones = {
+	"Throne of Thunder",
 	"Mogu'shan Vaults",
 	"Terrace of Endless Spring",
 	"Heart of Fear",
@@ -22,6 +23,23 @@ CT_RaidTracker_Zones = {
 };
 
 CT_RaidTracker_Bosses = {
+	-- MoP
+    	-- 5.2
+    	["Throne of Thunder"] = {
+		"Jin'rokh the Breaker",
+		"Horridon",
+		"Council of Elders",
+		"Tortos",
+		"Megaera",
+		"Ji-Kun",
+	        "Durumu the Forgotten",
+		"Primordius",
+		"Dark Animus",
+		"Iron Qon",
+		"Twin Consorts",
+		"Lei Shen",
+	        "Ra-den",
+	},
 	["Mogu'shan Vaults"] = {
 		"The Stone Guard",
 		"Feng the Accursed",
@@ -118,6 +136,8 @@ CT_RaidTracker_lang_ReceivesLoot4 = "You receive loot: "..CT_ITEMREG_MULTI..".";
 CT_RaidTracker_lang_ReceivesLootYou = "You";
 
 CT_RaidTracker_ZoneTriggers = {
+	-- MoP
+    	["Throne of Thunder"] = "Throne of Thunder",
 	["Mogu'shan Vaults"] = "Mogu'shan Vaults",
 	["Terrace of Endless Spring"] = "Terrace of Endless Spring",
 	["Heart of Fear"] = "Heart of Fear",
@@ -135,6 +155,29 @@ CT_RaidTracker_ZoneTriggers = {
 };
 
 CT_RaidTracker_BossUnitTriggers = {
+	-- Throne of Thunder
+	["Jin'rokh the Breaker"] 		=	"Jin'rokh the Breaker",
+	["Horridon"] 			        =	"Horridon",
+	["Council of Elders"] 			=	"Council of Elders",
+	["Kazra'jin"] 			        =	"Council of Elders",
+	["Sul the Sandcrawler"] 		=	"IGNORE",
+	["Frost King Malakk"] 			=	"IGNORE",
+	["High Priestess Mar'li"] 		=	"IGNORE",
+	["Tortos"] 			        =	"Tortos",
+	["Megaera"] 			        =	"Megaera",
+	["Flaming Head"] 			=	"Megaera",
+	["Frozen Head"] 			=	"Megaera",
+	["Venomous Head"] 			=	"Megaera",
+	["Ji-Kun"] 			        =	"Ji-Kun",
+	["Durumu the Forgotten"] 		=	"Durumu the Forgotten",
+	["Primordius"] 			        =	"Primordius",
+	["Dark Animus"] 			=	"Dark Animus",
+	["Iron Qon"] 			        =	"Iron Qon",
+	["Twin Consorts"] 			=	"Twin Consorts",
+	["Lu'lin"] 			        =	"Twin Consorts",
+	["Suen"] 			        =	"IGNORE",
+	["Lei Shen"] 			        =	"Lei Shen",
+	["Ra-den"] 			        =	"Ra-den",
 	-- Mogushan
 	["The Stone Guard"] 			=	"The Stone Guard",
 	["Amethyst Guardian"] 			=	"The Stone Guard",
