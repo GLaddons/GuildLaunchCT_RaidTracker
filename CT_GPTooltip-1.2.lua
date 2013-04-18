@@ -7,6 +7,8 @@ local MINOR_VERSION = 10200
 local lib, oldMinor = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then return end
 
+local Debug = LibStub("LibDebug-1.0")
+local ItemUtils = LibStub("LibItemUtils-1.0")
 -- This is the high price equipslot multiplier.
 local EQUIPSLOT_MULTIPLIER_1 = {
   INVTYPE_HEAD = 1,
@@ -29,7 +31,7 @@ local EQUIPSLOT_MULTIPLIER_1 = {
   INVTYPE_WEAPONOFFHAND = 0.5,
   INVTYPE_HOLDABLE = 0.5,
   INVTYPE_RANGED = 2.0,
-  INVTYPE_RANGEDRIGHT = 1.5,
+  INVTYPE_RANGEDRIGHT = 2.0,
   INVTYPE_THROWN = 0.5,
   INVTYPE_RELIC = 0.5,
   -- Hack for Tier 9 25M heroic tokens.
@@ -40,8 +42,9 @@ local EQUIPSLOT_MULTIPLIER_1 = {
 -- tanking shields).
 local EQUIPSLOT_MULTIPLIER_2 = {
   INVTYPE_WEAPON = 0.5,
-  INVTYPE_2HWEAPON = 1,
+  INVTYPE_2HWEAPON = 0.5,
   INVTYPE_SHIELD = 0.5,
+  INVTYPE_RANGEDRIGHT = 1.5
 }
 
 --Used to display GP values directly on tier tokens
@@ -321,6 +324,90 @@ local CUSTOM_ITEM_DATA = {
   [78860] = { 4, 410, "INVTYPE_SHOULDER" },
   [78861] = { 4, 410, "INVTYPE_SHOULDER" },
 
+ -- T14 normal
+  [89248] = { 4, 496, "INVTYPE_SHOULDER" },
+  [89247] = { 4, 496, "INVTYPE_SHOULDER" },
+  [89246] = { 4, 496, "INVTYPE_SHOULDER" },
+
+  [89245] = { 4, 496, "INVTYPE_LEGS" },
+  [89244] = { 4, 496, "INVTYPE_LEGS" },
+  [89243] = { 4, 496, "INVTYPE_LEGS" },
+
+  [89234] = { 4, 496, "INVTYPE_HEAD" },
+  [89236] = { 4, 496, "INVTYPE_HEAD" },
+  [89235] = { 4, 496, "INVTYPE_HEAD" },
+
+  [89242] = { 4, 496, "INVTYPE_HAND" },
+  [89241] = { 4, 496, "INVTYPE_HAND" },
+  [89240] = { 4, 496, "INVTYPE_HAND" },
+
+  [89239] = { 4, 496, "INVTYPE_CHEST" },
+  [89238] = { 4, 496, "INVTYPE_CHEST" },
+  [89237] = { 4, 496, "INVTYPE_CHEST" },
+
+ -- T14 heroic
+  [89261] = { 4, 509, "INVTYPE_SHOULDER" },
+  [89263] = { 4, 509, "INVTYPE_SHOULDER" },
+  [89262] = { 4, 509, "INVTYPE_SHOULDER" },
+
+  [89252] = { 4, 509, "INVTYPE_LEGS" },
+  [89254] = { 4, 509, "INVTYPE_LEGS" },
+  [89253] = { 4, 509, "INVTYPE_LEGS" },
+
+  [89258] = { 4, 509, "INVTYPE_HEAD" },
+  [89260] = { 4, 509, "INVTYPE_HEAD" },
+  [89259] = { 4, 509, "INVTYPE_HEAD" },
+
+  [89255] = { 4, 509, "INVTYPE_HAND" },
+  [89257] = { 4, 509, "INVTYPE_HAND" },
+  [89256] = { 4, 509, "INVTYPE_HAND" },
+
+  [89249] = { 4, 509, "INVTYPE_CHEST" },
+  [89251] = { 4, 509, "INVTYPE_CHEST" },
+  [89250] = { 4, 509, "INVTYPE_CHEST" },
+
+  -- T15 normal
+  [95573] = { 4, 522, "INVTYPE_SHOULDER" },
+  [95583] = { 4, 522, "INVTYPE_SHOULDER" },
+  [95578] = { 4, 522, "INVTYPE_SHOULDER" },
+
+  [95572] = { 4, 522, "INVTYPE_LEGS" },
+  [95581] = { 4, 522, "INVTYPE_LEGS" },
+  [95576] = { 4, 522, "INVTYPE_LEGS" },
+
+  [95571] = { 4, 522, "INVTYPE_HEAD" },
+  [95582] = { 4, 522, "INVTYPE_HEAD" },
+  [95577] = { 4, 522, "INVTYPE_HEAD" },
+
+  [95570] = { 4, 522, "INVTYPE_HAND" },
+  [95580] = { 4, 522, "INVTYPE_HAND" },
+  [95575] = { 4, 522, "INVTYPE_HAND" },
+
+  [95569] = { 4, 522, "INVTYPE_CHEST" },
+  [95579] = { 4, 522, "INVTYPE_CHEST" },
+  [95574] = { 4, 522, "INVTYPE_CHEST" },
+
+  -- T15 heroic
+  [96699] = { 4, 535, "INVTYPE_SHOULDER" },
+  [96700] = { 4, 535, "INVTYPE_SHOULDER" },
+  [96701] = { 4, 535, "INVTYPE_SHOULDER" },
+
+  [96631] = { 4, 535, "INVTYPE_LEGS" },
+  [96632] = { 4, 535, "INVTYPE_LEGS" },
+  [96633] = { 4, 535, "INVTYPE_LEGS" },
+
+  [96625] = { 4, 535, "INVTYPE_HEAD" },
+  [96623] = { 4, 535, "INVTYPE_HEAD" },
+  [96624] = { 4, 535, "INVTYPE_HEAD" },
+
+  [96599] = { 4, 535, "INVTYPE_HAND" },
+  [96600] = { 4, 535, "INVTYPE_HAND" },
+  [96601] = { 4, 535, "INVTYPE_HAND" },
+
+  [96567] = { 4, 535, "INVTYPE_CHEST" },
+  [96568] = { 4, 535, "INVTYPE_CHEST" },
+  [96566] = { 4, 535, "INVTYPE_CHEST" },
+
 }
 
 -- The default quality threshold:
@@ -373,7 +460,6 @@ end
 
 function lib:GetValue(item)
   if not item then return end
-
   local _, itemLink, rarity, level, _, _, _, _, equipLoc = GetItemInfo(item)
   if not itemLink then return end
 
@@ -381,6 +467,11 @@ function lib:GetValue(item)
   local itemID = itemLink:match("item:(%d+)")
   if not itemID then return end
   itemID = tonumber(itemID)
+  level = ItemUtils:GetItemIlevel(item, level)
+  -- Check if item is relevant
+  if level < 463 then
+    return nil, nil, level, rarity, equipLoc
+  end
 
   -- Check to see if there is custom data for this item ID
   if CUSTOM_ITEM_DATA[itemID] then
@@ -410,9 +501,12 @@ function lib:GetValue(item)
     standard_ilvl = 378
   elseif MAX_PLAYER_LEVEL_TABLE[GetExpansionLevel()] < 90 then
     standard_ilvl = 397
-  else
+  elseif (select(4, GetBuildInfo()) < 50200) then
     standard_ilvl = 496
+  else
+    standard_ilvl = 522
   end
+
   local multiplier = 1000 * 2 ^ (-standard_ilvl / 26)
   local gp_base = multiplier * 2 ^ (level/26)
   local high = math.floor(0.5 + gp_base * slot_multiplier1)

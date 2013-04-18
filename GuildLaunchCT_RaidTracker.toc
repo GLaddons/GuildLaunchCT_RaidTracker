@@ -1,6 +1,6 @@
 ## Interface: 50200
 ## Title: GL CT_RaidTracker
-## Version: v2.10.0
+## Version: v2.11.0
 ## X-Version: (Guild Launch) Modded by Eris & Guild Launch
 ## Notes: Counts raid loot and attendence, modified for GuildLaunch.com
 ## X-GLExportVersion: GL-1.0
@@ -19,6 +19,10 @@ Libs\Dewdrop-2.0\Dewdrop-2.0.lua
 Libs\Metrognome-2.0\Metrognome-2.0.lua
 Libs\Tablet-2.0\Tablet-2.0.lua
 Libs\FuBarPlugin-2.0\FuBarPlugin-2.0.lua
+Libs\LibBabble-Inventory-3.0\lib.xml
+Libs\LibDeformat-3.0\lib.xml
+LibDebug-1.0.lua
+LibItemUtils-1.0.lua
 CT_GPTooltip-1.2.lua
 localization.lua
 CT_RaidTrackerOptions.xml
