@@ -5,7 +5,7 @@ CT_ITEMREG = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)%";
 CT_ITEMREG_MULTI = "(|c(%x+)|Hitem:([-%d:]+)|h%[(.-)%]|h|r)x(%d+)%";
 
 CT_RaidTracker_Zones = {
-	"Throne of Thunder",
+	"Siege of Orgrimmar",
 	"Mogu'shan Vaults",
 	"Terrace of Endless Spring",
 	"Heart of Fear",
@@ -24,8 +24,25 @@ CT_RaidTracker_Zones = {
 
 CT_RaidTracker_Bosses = {
 	-- MoP
+		-- 5.4
+    ["Siege of Orgrimmar"] = {
+		"Immerseus",
+		"The Fallen Protectors",
+		"Norushen",
+		"Sha of Pride",
+		"Galakras",
+		"Iron Juggernaut",
+	    "Kor'kron Dark Shaman",
+		"General Nazgrim",
+		"Malkorok",
+		"Spoils of Pandaria",
+		"Thok the Bloodthirsty",
+		"Siegecrafter Blackfuse",
+	    "Paragons of the Klaxxi",
+	    "Garrosh Hellscream",
+	},
     	-- 5.2
-    	["Throne of Thunder"] = {
+    ["Throne of Thunder"] = {
 		"Jin'rokh the Breaker",
 		"Horridon",
 		"Council of Elders",
@@ -137,6 +154,7 @@ CT_RaidTracker_lang_ReceivesLootYou = "You";
 
 CT_RaidTracker_ZoneTriggers = {
 	-- MoP
+	["Siege of Orgrimmar"] = "Siege of Orgrimmar",
     	["Throne of Thunder"] = "Throne of Thunder",
 	["Mogu'shan Vaults"] = "Mogu'shan Vaults",
 	["Terrace of Endless Spring"] = "Terrace of Endless Spring",
@@ -155,6 +173,21 @@ CT_RaidTracker_ZoneTriggers = {
 };
 
 CT_RaidTracker_BossUnitTriggers = {
+	-- siege of orgrimmar
+	["Immerseus"] = "Immerseus",
+	["The Fallen Protectors"] = "The Fallen Protectors",
+	["Norushen"] = "Norushen",
+	["Sha of Pride"] = "Sha of Pride",
+	["Galakras"] = "Galakras",
+	["Iron Juggernaut"] = "Iron Juggernaut",
+	["Kor'kron Dark Shaman"] = "Kor'kron Dark Shaman",
+	["General Nazgrim"] = "General Nazgrim",
+	["Malkorok"] = "Malkorok",
+	["Spoils of Pandaria"] = "Spoils of Pandaria",
+	["Thok the Bloodthirsty"] = "Thok the Bloodthirsty",
+	["Siegecrafter Blackfuse"] = "Siegecrafter Blackfuse",
+	["Paragons of the Klaxxi"] = "Paragons of the Klaxxi",
+	["Garrosh Hellscream"] = "Garrosh Hellscream",	
 	-- Throne of Thunder
 	["Jin'rokh the Breaker"] 		=	"Jin'rokh the Breaker",
 	["Horridon"] 			        =	"Horridon",
@@ -281,6 +314,12 @@ CT_RaidTracker_lang_BossKills_LeiShi_BossName = "Lei Shi";
 
 CT_RaidTracker_lang_BossKills_Tsulong_Yell = "I thank you, strangers. I have been freed.";
 CT_RaidTracker_lang_BossKills_Tsulong_BossName = "Tsulong";
+
+CT_RaidTracker_lang_BossKills_Spoils_Yell = "Have a great day and don't let the door hit you on the way out.";
+CT_RaidTracker_lang_BossKills_Spoils_BossName = "Spoils of Pandaria";
+
+CT_RaidTracker_lang_BossKills_FallenProtectors_Yell = "May your souls become one with the land you gave your life to protect.";
+CT_RaidTracker_lang_BossKills_FallenProtectors_BossName = "The Fallen Protectors";
 
 -- Translations
 
