@@ -501,7 +501,7 @@ function lib:GetValue(item)
     standard_ilvl = 378
   elseif MAX_PLAYER_LEVEL_TABLE[GetExpansionLevel()] < 90 then
     standard_ilvl = 397
-  elseif (select(4, GetBuildInfo()) < 50200) then
+  elseif (select(4, GetBuildInfo()) < 50400) then
     standard_ilvl = 496
   else
     standard_ilvl = 522
